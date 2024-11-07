@@ -340,8 +340,9 @@ open class MessagesViewController: UIViewController, UICollectionViewDelegateFlo
     /// Constraints of inputContainerView are managed by keyboardManager
     inputContainerView.translatesAutoresizingMaskIntoConstraints = false
 
+      let offsetY = max(CGRectGetMaxY(UIApplication.shared.statusBarFrame), 20) + 44
     NSLayoutConstraint.activate([
-      messagesCollectionView.topAnchor.constraint(equalTo: view.topAnchor),
+        messagesCollectionView.topAnchor.constraint(equalTo: view.topAnchor,constant: offsetY),
       messagesCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
       messagesCollectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
       messagesCollectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
