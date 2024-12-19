@@ -118,4 +118,8 @@ open class MessagesCollectionViewLayoutAttributes: UICollectionViewLayoutAttribu
     titleFont: .preferredFont(forTextStyle: .footnote),
     teaserFont: .preferredFont(forTextStyle: .caption2),
     domainFont: .preferredFont(forTextStyle: .caption1))
+    
+    public var messageReplayHeight:CGFloat = 0
 }
+
+

@@ -20,17 +20,17 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-internal enum MessageKitError {
-  static let avatarPositionUnresolved = "AvatarPosition Horizontal.natural needs to be resolved."
-  static let nilMessagesDataSource = "MessagesDataSource has not been set."
-  static let nilMessagesDisplayDelegate = "MessagesDisplayDelegate has not been set."
-  static let nilMessagesLayoutDelegate = "MessagesLayoutDelegate has not been set."
-  static let notMessagesCollectionView = "The collectionView is not a MessagesCollectionView."
-  static let layoutUsedOnForeignType = "MessagesCollectionViewFlowLayout is being used on a foreign type."
-  static let unrecognizedSectionKind = "Received unrecognized element kind:"
-  static let unrecognizedCheckingResult = "Received an unrecognized NSTextCheckingResult.CheckingType"
-  static let couldNotLoadAssetsBundle = "MessageKit: Could not load the assets bundle"
-  static let customDataUnresolvedCell = "Did not return a cell for MessageKind.custom(Any)."
-  static let customDataUnresolvedSize = "Did not return a size for MessageKind.custom(Any)."
-  static let couldNotFindColorAsset = "MessageKit: Could not load the color asset."
+public enum MessageKitError {
+    public static let avatarPositionUnresolved = "AvatarPosition Horizontal.natural needs to be resolved."
+    public static let nilMessagesDataSource = "MessagesDataSource has not been set."
+    public static let nilMessagesDisplayDelegate = "MessagesDisplayDelegate has not been set."
+    public static let nilMessagesLayoutDelegate = "MessagesLayoutDelegate has not been set."
+    public static let notMessagesCollectionView = "The collectionView is not a MessagesCollectionView."
+    public static let layoutUsedOnForeignType = "MessagesCollectionViewFlowLayout is being used on a foreign type."
+    public static let unrecognizedSectionKind = "Received unrecognized element kind:"
+    public static let unrecognizedCheckingResult = "Received an unrecognized NSTextCheckingResult.CheckingType"
+    public static let couldNotLoadAssetsBundle = "MessageKit: Could not load the assets bundle"
+    public static let customDataUnresolvedCell = "Did not return a cell for MessageKind.custom(Any)."
+    public static let customDataUnresolvedSize = "Did not return a size for MessageKind.custom(Any)."
+    public static let couldNotFindColorAsset = "MessageKit: Could not load the color asset."
 }

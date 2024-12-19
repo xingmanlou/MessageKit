@@ -254,8 +254,10 @@ open class MessageSizeCalculator: CellSizeCalculator {
 
   // MARK: Public
 
-  public var incomingAvatarSize = CGSize(width: 30, height: 30)
-  public var outgoingAvatarSize = CGSize(width: 30, height: 30)
+//  public var incomingAvatarSize = CGSize(width: 30, height: 30)
+//  public var outgoingAvatarSize = CGSize(width: 30, height: 30)
+    public var incomingAvatarSize:CGSize = .zero
+    public var outgoingAvatarSize:CGSize = .zero
 
   public var incomingAvatarPosition = AvatarPosition(vertical: .cellBottom)
   public var outgoingAvatarPosition = AvatarPosition(vertical: .cellBottom)
@@ -333,7 +335,7 @@ open class MessageSizeCalculator: CellSizeCalculator {
     return textStorage
   }()
 
-  internal func labelSize(for attributedText: NSAttributedString, considering maxWidth: CGFloat) -> CGSize {
+    public func labelSize(for attributedText: NSAttributedString, considering maxWidth: CGFloat) -> CGSize {
     let constraintBox = CGSize(width: maxWidth, height: .greatestFiniteMagnitude)
 
     textContainer.size = constraintBox

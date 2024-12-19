@@ -206,7 +206,7 @@ open class MessageLabel: UILabel {
 
   internal lazy var rangesForDetectors: [DetectorType: [(NSRange, MessageTextCheckingType)]] = [:]
 
-  internal var messageLabelFont: UIFont?
+    public var messageLabelFont: UIFont?
 
   // MARK: Private
 

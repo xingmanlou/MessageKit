@@ -66,8 +66,12 @@ open class MessagesCollectionView: UICollectionView {
     return layout
   }
 
+    open var tapGestureBlock:(() -> Void )?
   @objc
   open func handleTapGesture(_ gesture: UIGestureRecognizer) {
+      if let block = tapGestureBlock{
+          block()
+      }
     guard gesture.state == .ended else { return }
 
     let touchLocation = gesture.location(in: self)
@@ -176,7 +180,9 @@ open class MessagesCollectionView: UICollectionView {
 
   /// Display the date of message by swiping left.
   /// The default value of this property is `false`.
-  internal var showMessageTimestampOnSwipeLeft = false
+//  internal var showMessageTimestampOnSwipeLeft = false
+    //bs
+    internal var showMessageTimestampOnSwipeLeft = true
 
   // MARK: - Typing Indicator API
 

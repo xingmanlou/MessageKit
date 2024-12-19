@@ -36,4 +36,13 @@ public protocol MessageType {
 
   /// The kind of message and its underlying kind.
   var kind: MessageKind { get }
+    
+    //bs 增加回复
+    var replyMessage:String? { get }
+}
+
+extension MessageType{
+    var replyMessage:String? {
+        return nil
+    }
 }

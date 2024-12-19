@@ -21,6 +21,7 @@
 // SOFTWARE.
 
 import Foundation
+import UIKit
 
 // MARK: - MessageCellDelegate
 
@@ -157,6 +158,10 @@ public protocol MessageCellDelegate: MessageLabelDelegate {
   /// `indexPath(for: cell)` method. Then using the returned `IndexPath` with the `MessagesDataSource`
   /// method `messageForItem(at:indexPath:messagesCollectionView)`.
   func didStopAudio(in cell: AudioMessageCell)
+    
+    func menuActionList(in cell: MessageCollectionViewCell) -> [UIAction]
+    
+    func didSelectCustomMentionName(in cell: MessageCollectionViewCell,name:String)
 }
 
 extension MessageCellDelegate {
@@ -185,4 +190,10 @@ extension MessageCellDelegate {
   public func didTapMessageBottomLabel(in _: MessageCollectionViewCell) { }
 
   public func didTapAccessoryView(in _: MessageCollectionViewCell) { }
+    
+    public func menuActionList(in cell: MessageCollectionViewCell) -> [UIAction] {
+        return []
+    }
+    
+    func didSelectCustomMentionName(in cell: MessageCollectionViewCell,name:String) {}
 }

@@ -23,8 +23,83 @@
 import Foundation
 import UIKit
 
+
 /// A subclass of `MessageCollectionViewCell` used to display text, media, and location messages.
-open class MessageContentCell: MessageCollectionViewCell {
+open class MessageContentCell: MessageCollectionViewCell,UIContextMenuInteractionDelegate {
+    
+    func takeScreenshot(view: UIView) -> UIImage? {
+        
+        let renderer = UIGraphicsImageRenderer(size: view.bounds.size)
+            return renderer.image { context in
+                // 绘制透明背景
+                context.cgContext.clear(view.bounds)
+
+                // 保存当前状态
+                context.cgContext.saveGState()
+
+                // 应用 mask
+                if let maskLayer = view.layer.mask {
+                    context.cgContext.addRect(view.bounds)
+                    context.cgContext.clip() // 应用 mask
+
+                    // 渲染 UIImageView 的内容
+                    view.layer.render(in: context.cgContext)
+                }
+
+                // 恢复状态
+                context.cgContext.restoreGState()
+            }
+        
+//        UIGraphicsBeginImageContextWithOptions(view.bounds.size, false, 0.0)
+//        guard let context = UIGraphicsGetCurrentContext() else { return nil }
+//        view.layer.render(in: context)
+//        let image = UIGraphicsGetImageFromCurrentImageContext()
+//        UIGraphicsEndImageContext()
+//        
+//        return image
+    }
+    
+    public func contextMenuInteraction(_ interaction: UIContextMenuInteraction, configurationForMenuAtLocation location: CGPoint) -> UIContextMenuConfiguration? {
+        guard let actionList = self.delegate?.menuActionList(in: self),actionList.count > 0 else {
+            return nil
+        }
+        let configuration = UIContextMenuConfiguration(identifier: nil, previewProvider: {[weak self] () -> UIViewController? in
+            guard let self = self,
+                  let image = self.takeScreenshot(view: self.messageContainerView) else {
+                return nil
+            }
+            // 创建并返回自定义预览视图控制器
+            let previewController = UIViewController()
+            
+            let imageView = UIImageView(image: image)
+//            UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
+            imageView.translatesAutoresizingMaskIntoConstraints = false
+            imageView.backgroundColor = .clear
+            previewController.preferredContentSize = CGSizeMake(self.messageContainerView.bounds.width + 10, self.messageContainerView.bounds.height + 10)
+            previewController.view.backgroundColor = .lightGray
+//            previewController.view.layer.cornerRadius = 0
+//            previewController.view.layer.masksToBounds = true
+            
+            let blurEffect = UIBlurEffect(style: .light) // 可以选择 .light 或 .dark
+            let blurEffectView = UIVisualEffectView(effect: blurEffect)
+            blurEffectView.frame = bounds
+            blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+            addSubview(blurEffectView)
+            sendSubviewToBack(blurEffectView)
+            
+            previewController.view.addSubview(imageView)
+            NSLayoutConstraint.activate([
+                imageView.centerXAnchor.constraint(equalTo: previewController.view.centerXAnchor),
+                imageView.centerYAnchor.constraint(equalTo: previewController.view.centerYAnchor)
+            ])
+            
+            return previewController
+                        
+        }) { suggestedActions in
+            return UIMenu(title: "", children: actionList)
+        }
+        return configuration
+    }
   // MARK: Lifecycle
 
   public override init(frame: CGRect) {
@@ -48,6 +123,8 @@ open class MessageContentCell: MessageCollectionViewCell {
   open var messageContainerView: MessageContainerView = {
     let containerView = MessageContainerView()
     containerView.clipsToBounds = true
+      containerView.isUserInteractionEnabled = true
+//      containerView.backgroundColor = .clear
     containerView.layer.masksToBounds = true
     return containerView
   }()
@@ -110,6 +187,8 @@ open class MessageContentCell: MessageCollectionViewCell {
       messageContainerView,
       avatarView,
       messageTimestampLabel)
+      let interaction = UIContextMenuInteraction(delegate: self)
+      messageContainerView.addInteraction(interaction)
   }
 
   // MARK: - Configuration
@@ -165,7 +244,22 @@ open class MessageContentCell: MessageCollectionViewCell {
     messageBottomLabel.attributedText = bottomMessageLabelText
     messageTimestampLabel.attributedText = messageTimestampLabelText
     messageTimestampLabel.isHidden = !messagesCollectionView.showMessageTimestampOnSwipeLeft
+      
   }
+    
+    open func updateCellStatus(with message: MessageType, at indexPath: IndexPath, and messagesCollectionView: MessagesCollectionView){
+        
+        guard let dataSource = messagesCollectionView.messagesDataSource else {
+          fatalError(MessageKitError.nilMessagesDataSource)
+        }
+        guard let displayDelegate = messagesCollectionView.messagesDisplayDelegate else {
+          fatalError(MessageKitError.nilMessagesDisplayDelegate)
+        }
+
+        displayDelegate.configureAccessoryView(accessoryView, for: message, at: indexPath, in: messagesCollectionView)
+        let bottomMessageLabelText = dataSource.messageBottomLabelAttributedText(for: message, at: indexPath)
+        messageBottomLabel.attributedText = bottomMessageLabelText
+    }
 
   /// Handle tap gesture on contentView and its subviews.
   open override func handleTapGesture(_ gesture: UIGestureRecognizer) {

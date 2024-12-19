@@ -259,7 +259,56 @@ open class MessagesViewController: UIViewController, UICollectionViewDelegateFlo
     return layoutDelegate.footerViewSize(for: section, in: messagesCollectionView)
   }
 
+//    open func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+//        // 创建一个高级配置对象
+//        let configuration = UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { suggestedActions in
+//            // 创建自定义菜单项
+//            let action1 = UIAction(title: "Action 1", image: UIImage(systemName: "star")) { action in
+//                // 处理Action 1的点击事件
+//                print("Action 1 selected")
+//            }
+//            let action2 = UIAction(title: "Action 2", image: UIImage(systemName: "square.and.pencil")) { action in
+//                // 处理Action 2的点击事件
+//                print("Action 2 selected")
+//            }
+//            // 将菜单项组合在一起
+//            return UIMenu(title: "", children: [action1, action2])
+//        }
+//        
+//        // 自定义背景区域
+//        if let cell = collectionView.cellForItem(at: indexPath),let containerView = (cell as? MessageContentCell)?.messageContainerView {
+//            // 创建模糊效果
+//                        let blurEffect = UIBlurEffect(style: .light)
+//                        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+//            blurEffectView.frame = containerView.frame
+//                        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+//                        
+//                        // 添加模糊视图到 collectionView
+//                        collectionView.addSubview(blurEffectView)
+//
+//                        // 创建一个 overlay 视图
+//                        let overlayView = UIView(frame: cell.bounds)
+//                        overlayView.backgroundColor = UIColor.red.withAlphaComponent(0.5) // 自定义背景颜色
+//                        overlayView.layer.cornerRadius = 10 // 可选：圆角
+//                        overlayView.layer.masksToBounds = true
+//                        
+//                        // 只将 overlay 添加到所选单元格
+//                        cell.addSubview(overlayView)
+//                        
+//                        // 定时移除背景视图
+//                        DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
+//                            overlayView.removeFromSuperview()
+//                            blurEffectView.removeFromSuperview() // 移除模糊视图
+//                        }
+//            
+//        }
+//        
+//        // 返回配置对象
+//        return configuration
+//    }
+    
   open func collectionView(_: UICollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
+      return false
     guard let messagesDataSource = messagesCollectionView.messagesDataSource else { return false }
 
     if isSectionReservedForTypingIndicator(indexPath.section) {
