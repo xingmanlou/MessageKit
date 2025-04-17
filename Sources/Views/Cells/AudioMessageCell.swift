@@ -23,10 +23,19 @@
 import AVFoundation
 import UIKit
 
-/// A subclass of `MessageContentCell` used to display video and audio messages.
-open class AudioMessageCell: MessageContentCell {
-  // MARK: Open
+public protocol AudioMessageCellDelegate:NSObjectProtocol{
+    
+    var playButton:UIButton {get set}
+    var progressView:UIProgressView {get set}
+    var delegate: MessageCellDelegate? {get set}
+    var durationLabel: UILabel {get set}
+    var progress: Float {get set}
+}
 
+/// A subclass of `MessageContentCell` used to display video and audio messages.
+open class AudioMessageCell: MessageContentCell,AudioMessageCellDelegate {
+  // MARK: Open
+    public var progress: Float = 0
   /// Responsible for setting up the constraints of the cell's subviews.
   open func setupConstraints() {
     playButton.constraint(equalTo: CGSize(width: 25, height: 25))
@@ -131,6 +140,7 @@ open class AudioMessageCell: MessageContentCell {
   /// The play button view to display on audio messages.
   public lazy var playButton: UIButton = {
     let playButton = UIButton(type: .custom)
+      playButton.isUserInteractionEnabled = false
     let playImage = UIImage.messageKitImageWith(type: .play)
     let pauseImage = UIImage.messageKitImageWith(type: .pause)
     playButton.setImage(playImage?.withRenderingMode(.alwaysTemplate), for: .normal)

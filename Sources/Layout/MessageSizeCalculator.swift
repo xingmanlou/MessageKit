@@ -318,18 +318,18 @@ open class MessageSizeCalculator: CellSizeCalculator {
   }
 
   // MARK: Internal
-  internal lazy var textContainer: NSTextContainer = {
+    public lazy var textContainer: NSTextContainer = {
     let textContainer = NSTextContainer()
     textContainer.maximumNumberOfLines = 0
     textContainer.lineFragmentPadding = 0
     return textContainer
   }()
-  internal lazy var layoutManager: NSLayoutManager = {
+    public lazy var layoutManager: NSLayoutManager = {
     let layoutManager = NSLayoutManager()
     layoutManager.addTextContainer(textContainer)
     return layoutManager
   }()
-  internal lazy var textStorage: NSTextStorage = {
+    public lazy var textStorage: NSTextStorage = {
     let textStorage = NSTextStorage()
     textStorage.addLayoutManager(layoutManager)
     return textStorage

@@ -23,4 +23,4 @@
 import Foundation
 import UIKit
 
-public final class MessagesInputContainerView: UIView { }
+public final class MessagesInputContainerView: UIView {}

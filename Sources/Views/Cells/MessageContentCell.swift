@@ -49,14 +49,6 @@ open class MessageContentCell: MessageCollectionViewCell,UIContextMenuInteractio
                 // 恢复状态
                 context.cgContext.restoreGState()
             }
-        
-//        UIGraphicsBeginImageContextWithOptions(view.bounds.size, false, 0.0)
-//        guard let context = UIGraphicsGetCurrentContext() else { return nil }
-//        view.layer.render(in: context)
-//        let image = UIGraphicsGetImageFromCurrentImageContext()
-//        UIGraphicsEndImageContext()
-//        
-//        return image
     }
     
     public func contextMenuInteraction(_ interaction: UIContextMenuInteraction, configurationForMenuAtLocation location: CGPoint) -> UIContextMenuConfiguration? {
@@ -75,17 +67,20 @@ open class MessageContentCell: MessageCollectionViewCell,UIContextMenuInteractio
 //            UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
             imageView.translatesAutoresizingMaskIntoConstraints = false
             imageView.backgroundColor = .clear
-            previewController.preferredContentSize = CGSizeMake(self.messageContainerView.bounds.width + 10, self.messageContainerView.bounds.height + 10)
-            previewController.view.backgroundColor = .lightGray
+//            previewController.preferredContentSize = CGSizeMake(self.messageContainerView.bounds.width + 10, self.messageContainerView.bounds.height + 10)
+//            previewController.view.backgroundColor = .lightGray
+            previewController.preferredContentSize = CGSizeMake(self.messageContainerView.bounds.width + 10, self.messageContainerView.bounds.height + 6)
+            previewController.view.backgroundColor = UIColor(red: 0.65, green: 0.65, blue: 0.68, alpha: 1)
+
 //            previewController.view.layer.cornerRadius = 0
 //            previewController.view.layer.masksToBounds = true
             
-            let blurEffect = UIBlurEffect(style: .light) // 可以选择 .light 或 .dark
-            let blurEffectView = UIVisualEffectView(effect: blurEffect)
-            blurEffectView.frame = bounds
-            blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-            addSubview(blurEffectView)
-            sendSubviewToBack(blurEffectView)
+//            let blurEffect = UIBlurEffect(style: .light) // 可以选择 .light 或 .dark
+//            let blurEffectView = UIVisualEffectView(effect: blurEffect)
+//            blurEffectView.frame = bounds
+//            blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+//            addSubview(blurEffectView)
+//            sendSubviewToBack(blurEffectView)
             
             previewController.view.addSubview(imageView)
             NSLayoutConstraint.activate([

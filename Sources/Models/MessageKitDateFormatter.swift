@@ -31,7 +31,7 @@ open class MessageKitDateFormatter {
 
   // MARK: Open
 
-  open func configureDateFormatter(for date: Date) {
+    open func configureDateFormatter(for date: Date) {
     switch true {
     case Calendar.current.isDateInToday(date) || Calendar.current.isDateInYesterday(date):
       formatter.doesRelativeDateFormatting = true
@@ -39,13 +39,16 @@ open class MessageKitDateFormatter {
       formatter.timeStyle = .short
     case Calendar.current.isDate(date, equalTo: Date(), toGranularity: .weekOfYear):
 //      formatter.dateFormat = "EEEE h:mm a"
-        formatter.dateFormat = "E, h:mm a"
+        formatter.dateFormat = "E, h:mm"
     case Calendar.current.isDate(date, equalTo: Date(), toGranularity: .year):
 //      formatter.dateFormat = "E,d MMM, h:mm a"
-        formatter.dateFormat = "d MMM, h:mm"
+//        formatter.dateFormat = "d MMM, h:mm"
+//        formatter.dateStyle = .short
+        formatter.dateFormat = "M/d, h:mm"
     default:
 //      formatter.dateFormat = "MMM d, yyyy, h:mm a"
-        formatter.dateFormat = "MMM d, yyyy, h:mm"
+        formatter.dateFormat = "yyyy/MM/d, h:mm"
+//        formatter.dateStyle = .short
     }
   }
 
@@ -61,6 +64,11 @@ open class MessageKitDateFormatter {
     configureDateFormatter(for: date)
     return formatter.string(from: date)
   }
+
+    public func timeSectionString(from date: Date) -> String {
+      configureDateFormatter(for: date)
+      return formatter.string(from: date)
+    }
 
   public func attributedString(from date: Date, with attributes: [NSAttributedString.Key: Any]) -> NSAttributedString {
     let dateString = string(from: date)

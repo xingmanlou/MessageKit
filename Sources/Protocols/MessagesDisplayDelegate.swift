@@ -212,7 +212,7 @@ public protocol MessagesDisplayDelegate: AnyObject {
   ///
   /// - Note:
   ///   This protocol method is called by MessageKit every time an audio cell needs to be configure
-  func configureAudioCell(_ cell: AudioMessageCell, message: MessageType)
+    func configureAudioCell(_ cell: AudioMessageCellDelegate, message: MessageType)
 
   /// Specifies the tint color of play button and progress bar for an `AudioMessageCell`.
   ///
@@ -240,7 +240,7 @@ public protocol MessagesDisplayDelegate: AnyObject {
   ///     3. return the time as h:mm:ss for anything longer that 3600 seconds                (e.g. 1:19:08  means 1 hour 19 minutes and 8 seconds)
   func audioProgressTextFormat(
     _ duration: Float,
-    for audioCell: AudioMessageCell,
+    for audioCell: AudioMessageCellDelegate,
     in messageCollectionView: MessagesCollectionView) -> String
 
   /// Used to configure the `UIImageView` of a `LinkPreviewMessageCell`.
@@ -362,7 +362,7 @@ extension MessagesDisplayDelegate {
 
   // MARK: - Audio Message Defaults
 
-  public func configureAudioCell(_: AudioMessageCell, message _: MessageType) { }
+    public func configureAudioCell(_: AudioMessageCellDelegate, message _: MessageType) { }
 
   public func audioTintColor(
     for message: MessageType,
@@ -376,7 +376,7 @@ extension MessagesDisplayDelegate {
     return dataSource.isFromCurrentSender(message: message) ? .outgoingAudioMessageTint : .incomingAudioMessageTint
   }
 
-  public func audioProgressTextFormat(_ duration: Float, for _: AudioMessageCell, in _: MessagesCollectionView) -> String {
+    public func audioProgressTextFormat(_ duration: Float, for _: AudioMessageCellDelegate, in _: MessagesCollectionView) -> String {
     var returnValue = "0:00"
     // print the time as 0:ss if duration is up to 59 seconds
     // print the time as m:ss if duration is up to 59:59 seconds

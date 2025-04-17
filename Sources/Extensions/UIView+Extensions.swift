@@ -50,7 +50,7 @@ extension UIView {
     NSLayoutConstraint.activate(constraints)
   }
 
-  internal func constraint(equalTo size: CGSize) {
+    public func constraint(equalTo size: CGSize) {
     guard superview != nil else { return }
     translatesAutoresizingMaskIntoConstraints = false
     let constraints: [NSLayoutConstraint] = [
@@ -61,7 +61,7 @@ extension UIView {
   }
 
   @discardableResult
-  internal func addConstraints(
+    public func addConstraints(
     _ top: NSLayoutYAxisAnchor? = nil,
     left: NSLayoutXAxisAnchor? = nil,
     bottom: NSLayoutYAxisAnchor? = nil,

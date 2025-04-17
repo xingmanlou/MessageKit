@@ -261,15 +261,15 @@ extension ChatViewController: MessageCellDelegate {
     }
   }
 
-  func didStartAudio(in _: AudioMessageCell) {
+  func didStartAudio(in _: AudioMessageCellDelegate) {
     print("Did start playing audio sound")
   }
 
-  func didPauseAudio(in _: AudioMessageCell) {
+  func didPauseAudio(in _: AudioMessageCellDelegate) {
     print("Did pause audio sound")
   }
 
-  func didStopAudio(in _: AudioMessageCell) {
+  func didStopAudio(in _: AudioMessageCellDelegate) {
     print("Did stop audio sound")
   }
 

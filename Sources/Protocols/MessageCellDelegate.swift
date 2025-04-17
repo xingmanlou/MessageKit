@@ -127,7 +127,7 @@ public protocol MessageCellDelegate: MessageLabelDelegate {
   /// You can get a reference to the `MessageType` for the cell by using `UICollectionView`'s
   /// `indexPath(for: cell)` method. Then using the returned `IndexPath` with the `MessagesDataSource`
   /// method `messageForItem(at:indexPath:messagesCollectionView)`.
-  func didTapPlayButton(in cell: AudioMessageCell)
+  func didTapPlayButton(in cell: AudioMessageCellDelegate)
 
   /// Triggered when audio player start playing audio.
   ///
@@ -137,7 +137,7 @@ public protocol MessageCellDelegate: MessageLabelDelegate {
   /// You can get a reference to the `MessageType` for the cell by using `UICollectionView`'s
   /// `indexPath(for: cell)` method. Then using the returned `IndexPath` with the `MessagesDataSource`
   /// method `messageForItem(at:indexPath:messagesCollectionView)`.
-  func didStartAudio(in cell: AudioMessageCell)
+    func didStartAudio(in cell: AudioMessageCellDelegate)
 
   /// Triggered when audio player pause audio.
   ///
@@ -147,7 +147,7 @@ public protocol MessageCellDelegate: MessageLabelDelegate {
   /// You can get a reference to the `MessageType` for the cell by using `UICollectionView`'s
   /// `indexPath(for: cell)` method. Then using the returned `IndexPath` with the `MessagesDataSource`
   /// method `messageForItem(at:indexPath:messagesCollectionView)`.
-  func didPauseAudio(in cell: AudioMessageCell)
+  func didPauseAudio(in cell: AudioMessageCellDelegate)
 
   /// Triggered when audio player stoped audio.
   ///
@@ -157,11 +157,15 @@ public protocol MessageCellDelegate: MessageLabelDelegate {
   /// You can get a reference to the `MessageType` for the cell by using `UICollectionView`'s
   /// `indexPath(for: cell)` method. Then using the returned `IndexPath` with the `MessagesDataSource`
   /// method `messageForItem(at:indexPath:messagesCollectionView)`.
-  func didStopAudio(in cell: AudioMessageCell)
+    func didStopAudio(in cell: AudioMessageCellDelegate)
     
     func menuActionList(in cell: MessageCollectionViewCell) -> [UIAction]
     
-    func didSelectCustomMentionName(in cell: MessageCollectionViewCell,name:String)
+//    func didSelectCustomMentionName(in cell: MessageCollectionViewCell,name:String)
+    
+    func didLongPressAvatar(in _: MessageCollectionViewCell)
+
+    func reEdit(in _: MessageCollectionViewCell)
 }
 
 extension MessageCellDelegate {
@@ -179,13 +183,13 @@ extension MessageCellDelegate {
 
   public func didTapImage(in _: MessageCollectionViewCell) { }
 
-  public func didTapPlayButton(in _: AudioMessageCell) { }
+    public func didTapPlayButton(in _: AudioMessageCellDelegate) { }
 
-  public func didStartAudio(in _: AudioMessageCell) { }
+  public func didStartAudio(in _: AudioMessageCellDelegate) { }
 
-  public func didPauseAudio(in _: AudioMessageCell) { }
+  public func didPauseAudio(in _: AudioMessageCellDelegate) { }
 
-  public func didStopAudio(in _: AudioMessageCell) { }
+  public func didStopAudio(in _: AudioMessageCellDelegate) { }
 
   public func didTapMessageBottomLabel(in _: MessageCollectionViewCell) { }
 
@@ -195,5 +199,8 @@ extension MessageCellDelegate {
         return []
     }
     
-    func didSelectCustomMentionName(in cell: MessageCollectionViewCell,name:String) {}
+//    func didSelectCustomMentionName(in cell: MessageCollectionViewCell,name:String) {}
+    func didLongPressAvatar(in _: MessageCollectionViewCell) { }
+    
+    func reEdit(in _: MessageCollectionViewCell) {}
 }
