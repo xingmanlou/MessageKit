@@ -159,7 +159,7 @@ public protocol MessageCellDelegate: MessageLabelDelegate {
   /// method `messageForItem(at:indexPath:messagesCollectionView)`.
     func didStopAudio(in cell: AudioMessageCellDelegate)
     
-    func menuActionList(in cell: MessageCollectionViewCell) -> [UIAction]
+    func menuActionList(in cell: MessageCollectionViewCell) -> [UIMenuElement]
     
 //    func didSelectCustomMentionName(in cell: MessageCollectionViewCell,name:String)
     
@@ -195,7 +195,7 @@ extension MessageCellDelegate {
 
   public func didTapAccessoryView(in _: MessageCollectionViewCell) { }
     
-    public func menuActionList(in cell: MessageCollectionViewCell) -> [UIAction] {
+    public func menuActionList(in cell: MessageCollectionViewCell) -> [UIMenuElement] {
         return []
     }
     

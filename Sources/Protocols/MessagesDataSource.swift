@@ -208,7 +208,7 @@ extension MessagesDataSource {
   }
 
   public func cellBottomLabelAttributedText(for _: MessageType, at _: IndexPath) -> NSAttributedString? {
-    nil
+      nil
   }
 
   public func messageTopLabelAttributedText(for _: MessageType, at _: IndexPath) -> NSAttributedString? {
